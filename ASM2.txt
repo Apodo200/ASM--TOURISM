@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASM - لوحة التحكم</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>لوحة التحكم - جميع الرحلات</h1>
+    <table id="tripsTable">
+        <thead>
+            <tr>
+                <th>الاسم</th>
+                <th>الجنسية</th>
+                <th>رقم الهاتف</th>
+                <th>الإيميل</th>
+                <th>المطار</th>
+                <th>تاريخ الوصول</th>
+                <th>عدد الأيام</th>
+                <th>عدد الأفراد</th>
+                <th>الأماكن المطلوبة</th>
+                <th>السائق</th>
+                <th>المرشد</th>
+                <th>الفندق</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- البيانات ستظهر هنا -->
+        </tbody>
+    </table>
+
+    <script>
+        // جلب البيانات من localStorage
+        const trips = JSON.parse(localStorage.getItem("trips")) || [];
+        const tableBody = document.querySelector("#tripsTable tbody");
+
+        // عرض البيانات في الجدول
+        trips.forEach(trip => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${trip.name}</td>
+                <td>${trip.nationality}</td>
+                <td>${trip.phone}</td>
+                <td>${trip.email}</td>
+                <td>${trip.airport}</td>
+                <td>${trip.arrivalDate}</td>
+                <td>${trip.days}</td>
+                <td>${trip.people}</td>
+                <td>${trip.places}</td>
+                <td>${trip.driver}</td>
+                <td>${trip.guide || "لا يوجد"}</td>
+                <td>${trip.hotel}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    </script>
+</body>
+</html>
